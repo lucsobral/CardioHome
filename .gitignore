@@ -1,0 +1,9 @@
+# SO / editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Node (usado apenas por scripts/minify.js)
+node_modules/

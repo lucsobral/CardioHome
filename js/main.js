@@ -1,0 +1,124 @@
+// CardioVida — main.js
+// Menu responsivo, dropdown de navegação, accordion e destaque de página ativa.
+(function () {
+  'use strict';
+
+  function initMobileMenu() {
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('primary-nav');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', function () {
+      var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      nav.classList.toggle('is-open', !isOpen);
+      document.body.style.overflow = !isOpen ? 'hidden' : '';
+    });
+
+    // Fecha o menu ao navegar para um link (mobile)
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth < 1000) {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Fecha o menu ao redimensionar para desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 1000) {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  function initDropdown() {
+    var dropdown = document.querySelector('.nav-dropdown');
+    if (!dropdown) return;
+    var trigger = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', function () {
+      var isOpen = dropdown.classList.contains('is-open');
+      dropdown.classList.toggle('is-open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        dropdown.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function initActiveNavLink() {
+    var current = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-list a[href]').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href === current || (current === '' && href === 'index.html')) {
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+
+  function initAccordion() {
+    var triggers = document.querySelectorAll('.accordion-trigger');
+    triggers.forEach(function (trigger) {
+      var panel = document.getElementById(trigger.getAttribute('aria-controls'));
+      if (!panel) return;
+      var inner = panel.querySelector('.accordion-panel-inner');
+
+      trigger.addEventListener('click', function () {
+        var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        triggers.forEach(function (other) {
+          if (other !== trigger) {
+            other.setAttribute('aria-expanded', 'false');
+            var otherPanel = document.getElementById(other.getAttribute('aria-controls'));
+            if (otherPanel) otherPanel.style.maxHeight = null;
+          }
+        });
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+        panel.style.maxHeight = !isOpen ? inner.offsetHeight + 'px' : null;
+      });
+    });
+  }
+
+  function initSmoothAnchors() {
+    var headerEl = document.querySelector('.site-header');
+    var headerOffset = headerEl ? headerEl.offsetHeight : 0;
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var id = link.getAttribute('href').slice(1);
+        if (!id) return;
+        var target = document.getElementById(id);
+        if (!target) return;
+        event.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset - 12;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+        target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    initMobileMenu();
+    initDropdown();
+    initActiveNavLink();
+    initAccordion();
+    initSmoothAnchors();
+  });
+})();

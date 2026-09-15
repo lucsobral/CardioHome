@@ -1,0 +1,8 @@
+# Força o charset correto na resposta HTTP.
+# Sem isso, alguns servidores Apache enviam "charset=ISO-8859-1" por padrão,
+# o que sobrescreve a <meta charset="UTF-8"> da página e corrompe os acentos
+# (ex.: "cardiológico" vira "cardiolÃ³gico").
+AddDefaultCharset UTF-8
+AddType 'text/html; charset=UTF-8' .html .htm
+AddType 'text/css; charset=UTF-8' .css
+AddType 'application/javascript; charset=UTF-8' .js
