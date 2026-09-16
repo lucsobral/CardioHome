@@ -1,4 +1,4 @@
-// CardioVida — main.js
+// CardioHome — main.js
 // Menu responsivo, dropdown de navegação, accordion e destaque de página ativa.
 (function () {
   'use strict';
