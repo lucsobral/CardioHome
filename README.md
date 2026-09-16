@@ -5,7 +5,7 @@ Site estático (HTML5 + CSS3 + JavaScript puro, sem frameworks nem dependências
 É uma **página única** navegada por âncoras (`#exames`, `#comparativo`, `#como-funciona`, `#duvidas`, `#contato`), com um comparativo de custo/tempo entre ir até a clínica e receber o técnico em casa. Usa a paleta roxo/violeta da logo (`--color-home`), exceto no hero de vídeo, que mantém o degradê azul.
 
 Este projeto foi separado do site institucional da CardioVida e é hospedado de forma independente. A única ligação entre os dois é por links absolutos:
-- daqui para a CardioVida: `https://www.cardiovida.com/paciente/` (link "← Voltar para a CardioVida" no topo e "Sou paciente CardioVida" no rodapé);
+- daqui para a CardioVida: `https://www.cardiovida.com/paciente/` (link "Sou paciente CardioVida" no rodapé);
 - da CardioVida para cá: a seção "CardioHome" em `/paciente/` do site institucional aponta para `https://www.cardiohomepe.com.br/`.
 
 ## Estrutura de pastas
@@ -55,7 +55,7 @@ Depois acesse `http://localhost:PORTA/`. Abrir o `index.html` com duplo clique (
 ## Pendências antes de publicar
 
 - **Domínio:** em `index.html`, o `canonical`, o `og:url` e o campo `url` do schema.org apontam para `https://www.cardiohomepe.com.br/`. Se o site for publicado sem o `www` (ou com outro subdomínio), ajuste os três.
-- **Contato:** telefone, WhatsApp e e-mail são **placeholders** (`(81) 9.0000-0000` / `wa.me/5581900000000` / `cardiohome@cardiovida.com`), sinalizados com um aviso na seção `#contato`. Substitua pelos canais definitivos.
+- **Contato:** telefone e WhatsApp `(81) 9.9136-0796` (`wa.me/5581991360796`) e e-mail `cardiohomepe@gmail.com`. Aparecem na barra superior, na seção `#contato` e no rodapé — ao alterar, atualize os três lugares e o schema.org.
 - Não há imagem social (`og:image`) de 1200×630 — recomenda-se adicionar uma antes de compartilhar links em redes sociais.
 - Não há horário de funcionamento publicado; se existir, adicione ao rodapé, à seção `#contato` e ao schema.org (`openingHours`).
 - Vale confirmar se há uma lista de cidades/bairros específica dentro de Recife e Região Metropolitana para a seção de área de atendimento.
