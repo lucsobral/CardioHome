@@ -10,6 +10,7 @@ Site estático (HTML5 + CSS3 + JavaScript puro, sem frameworks nem dependências
 /
 ├── index.html                 Página única da CardioHome
 ├── .htaccess                  Força charset UTF-8 nas respostas (Apache)
+├── robots.txt / sitemap.xml   Indexação (Google Search Console)
 ├── css/
 │   ├── base.css / base.min.css          Reset, variáveis, tipografia, componentes base
 │   ├── layout.css / layout.min.css      Header, nav, footer, hero, blocos comuns
@@ -20,7 +21,8 @@ Site estático (HTML5 + CSS3 + JavaScript puro, sem frameworks nem dependências
 ├── assets/
 │   ├── fonts/    Inter (self-hosted, subconjunto latin, variável)
 │   ├── icons/    Favicons
-│   ├── img/      Logo CardioHome (header e rodapé) e poster do vídeo do hero
+│   ├── img/      Logo CardioHome (header, rodapé e 512px), poster do vídeo do hero
+│   │             e og-image.jpg (1200×630, prévia em WhatsApp/redes sociais)
 │   └── video/    Vídeo de fundo do hero
 └── scripts/
     └── minify.js   Gera os arquivos *.min.css / *.min.js a partir dos fontes
@@ -50,16 +52,16 @@ Depois acesse `http://localhost:PORTA/`. Abrir o `index.html` com duplo clique (
 
 ## Pendências antes de publicar
 
-- **Domínio:** em `index.html`, o `canonical`, o `og:url` e o campo `url` do schema.org apontam para `https://www.cardiohomepe.com.br/`. Se o site for publicado sem o `www` (ou com outro subdomínio), ajuste os três.
+- **Domínio:** `canonical`, `og:url`, `og:image`, schema.org, `robots.txt` e `sitemap.xml` apontam para `https://cardiohomepe.com.br/` (mesmo valor do `CNAME`). Se o domínio mudar, ajuste todos.
 - **Contato:** telefone, WhatsApp e e-mail são **placeholders** (`(81) 9.0000-0000` / `wa.me/5581900000000` / `cardiohome@cardiovida.com`), sinalizados com um aviso na seção `#contato`. Substitua pelos canais definitivos.
-- Não há imagem social (`og:image`) de 1200×630 — recomenda-se adicionar uma antes de compartilhar links em redes sociais.
 - Não há horário de funcionamento publicado; se existir, adicione ao rodapé, à seção `#contato` e ao schema.org (`openingHours`).
 - Vale confirmar se há uma lista de cidades/bairros específica dentro de Recife e Região Metropolitana para a seção de área de atendimento.
 
 ## Acessibilidade e SEO
 
 - HTML5 semântico, um único `<h1>`, `skip link`, `aria-expanded` no menu e no accordion.
-- Meta title/description, Open Graph e `canonical`.
-- Dados estruturados (`schema.org`): `MedicalBusiness`.
+- Meta title/description, Open Graph completo (com `og:image` 1200×630) e Twitter Card, `canonical`, `robots.txt` e `sitemap.xml`.
+- Dados estruturados (`schema.org`): `MedicalBusiness` (com logo, imagem, área atendida, exames e contato) e `FAQPage`.
+- Depois de publicar, cadastre o domínio no [Google Search Console](https://search.google.com/search-console) e envie o `sitemap.xml`. Para forçar o WhatsApp/Facebook a atualizar a prévia, use o [Sharing Debugger](https://developers.facebook.com/tools/debug/).
 - Fonte Inter self-hosted (subconjunto latin, variável) com `font-display: swap` e `preload`, para não depender de terceiros e manter bom LCP.
 - O vídeo do hero é `muted`, `autoplay`, `loop`, `playsinline`, com poster estático de fallback e ocultado quando o usuário prefere movimento reduzido (`prefers-reduced-motion`).
